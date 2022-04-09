@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import * as Tone from 'tone';
 import './App.css';
+
+const synth = new Tone.Synth().toDestination();
+
+const handleClick = async (note) => {
+  synth.triggerAttackRelease(note, '8n');
+  console.log('clicked');
+  await Tone.start();
+};
+
+// (e) => e.keyCode === 13 && handleClick('C5');
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      App
+      <button onClick={() => handleClick('C4')}>here is a button</button>
+      <button onClick={() => handleClick('G4')}>heres another</button>
+      <textarea onKeyPress={(e) => (e.code === 'KeyA') && handleClick('F4')}></textarea>
     </div>
   );
 }
